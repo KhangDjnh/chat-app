@@ -11,6 +11,17 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/realms/security-keycloak
+
+idp:
+  url: http://localhost:8180
+  client-id: security_app
+  client-secret: zDIbHoUdxlP1XzBIzGDB2MKxY9fM2FcD
+
 logging:
   level:
     org:
