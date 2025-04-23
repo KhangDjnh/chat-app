@@ -1,5 +1,6 @@
     package com.khangdjnh.identity_keycloak.controller;
 
+    import com.khangdjnh.identity_keycloak.dto.request.ChangePasswordRequest;
     import com.khangdjnh.identity_keycloak.dto.request.UserCreateRequest;
     import com.khangdjnh.identity_keycloak.dto.request.UserUpdateRequest;
     import com.khangdjnh.identity_keycloak.dto.response.ApiResponse;
@@ -68,6 +69,18 @@
                     .result(userService.updateUser(userId, request))
                     .build();
         }
+
+        @PutMapping("/{userId}/change-password")
+        @PreAuthorize("hasRole('ADMIN') or @authz.isOwner(#userId)")
+        ApiResponse<String> changePassword (@PathVariable String userId, @RequestBody ChangePasswordRequest request) {
+            userService.changePassword(userId, request);
+            return ApiResponse.<String>builder()
+                    .code(1000)
+                    .message("Success")
+                    .result("Password changed successfully")
+                    .build();
+        }
+
         @DeleteMapping("/{userId}")
         ApiResponse<String> deleteUser (@PathVariable String userId) {
             userService.deleteUser(userId);

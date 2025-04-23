@@ -22,6 +22,7 @@ public enum ErrorCode {
     USER_EXISTED(1010, "User already existed", HttpStatus.CONFLICT),
     EMAIL_EXISTED(1011, "Email already existed", HttpStatus.CONFLICT),
     USERNAME_IS_MISSING(1012, "Username is missing", HttpStatus.BAD_REQUEST),
+    NEW_PASSWORD_SAME_AS_OLD(1013, "New password is same as old password", HttpStatus.BAD_REQUEST)
     ;
 
     int code;
