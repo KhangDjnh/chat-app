@@ -10,6 +10,7 @@
     import lombok.RequiredArgsConstructor;
     import lombok.experimental.FieldDefaults;
     import lombok.extern.slf4j.Slf4j;
+    import org.springframework.security.access.prepost.PreAuthorize;
     import org.springframework.web.bind.annotation.*;
 
     import java.util.List;
@@ -49,7 +50,17 @@
                     .result(userService.getUserById(userId))
                     .build();
         }
+        @GetMapping("/getUserInfo")
+        ApiResponse<UserResponse> getUserInfo () {
+            return ApiResponse.<UserResponse>builder()
+                    .code(1000)
+                    .message("Success")
+                    .result(userService.getMyInfo())
+                    .build();
+        }
+
         @PutMapping("/{userId}")
+        @PreAuthorize("hasRole('ADMIN') or @authz.isOwner(#userId)")
         ApiResponse<UserResponse> updateUser (@PathVariable String userId, @RequestBody @Valid UserUpdateRequest request) {
             return ApiResponse.<UserResponse>builder()
                     .code(1000)

@@ -10,15 +10,18 @@ import org.springframework.http.HttpStatusCode;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public enum ErrorCode {
     UNCATEGORIZED_EXCEPTION(9999, "Uncategorized exception", HttpStatus.INTERNAL_SERVER_ERROR),
-    EXISTED_USER(10001, "User already existed", HttpStatus.CONFLICT),
-    USER_NOT_FOUND(10002, "User not found", HttpStatus.NOT_FOUND),
-    INVALID_USERNAME_OR_PASSWORD(10003, "Invalid username or password", HttpStatus.UNAUTHORIZED),
-    INVALID_USERNAME(10004, "Invalid username", HttpStatus.BAD_REQUEST),
-    INVALID_PASSWORD(10005, "Invalid password", HttpStatus.BAD_REQUEST),
-    INVALID_TOKEN(10006, "Invalid token", HttpStatus.UNAUTHORIZED),
-    UNAUTHENTICATED(10007, "User is not authenticated", HttpStatus.UNAUTHORIZED),
-    UNAUTHORIZED(10008, "User is not authorized", HttpStatus.FORBIDDEN),
-    INVALID_KEY(10009, "Invalid key", HttpStatus.BAD_REQUEST),
+    EXISTED_USER(1001, "User already existed", HttpStatus.CONFLICT),
+    USER_NOT_FOUND(1002, "User not found", HttpStatus.NOT_FOUND),
+    INVALID_USERNAME_OR_PASSWORD(1003, "Invalid username or password", HttpStatus.UNAUTHORIZED),
+    INVALID_USERNAME(1004, "Invalid username", HttpStatus.BAD_REQUEST),
+    INVALID_PASSWORD(1005, "Invalid password", HttpStatus.BAD_REQUEST),
+    INVALID_TOKEN(1006, "Invalid token", HttpStatus.UNAUTHORIZED),
+    UNAUTHENTICATED(1007, "User is not authenticated", HttpStatus.UNAUTHORIZED),
+    UNAUTHORIZED(1008, "User is not authorized", HttpStatus.FORBIDDEN),
+    INVALID_KEY(1009, "Invalid key", HttpStatus.BAD_REQUEST),
+    USER_EXISTED(1010, "User already existed", HttpStatus.CONFLICT),
+    EMAIL_EXISTED(1011, "Email already existed", HttpStatus.CONFLICT),
+    USERNAME_IS_MISSING(1012, "Username is missing", HttpStatus.BAD_REQUEST),
     ;
 
     int code;
