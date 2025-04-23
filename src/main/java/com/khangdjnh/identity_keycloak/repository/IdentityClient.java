@@ -1,8 +1,6 @@
 package com.khangdjnh.identity_keycloak.repository;
 
-import com.khangdjnh.identity_keycloak.identity.TokenExchangeParam;
-import com.khangdjnh.identity_keycloak.identity.TokenExchangeResponse;
-import com.khangdjnh.identity_keycloak.identity.UserCreationParam;
+import com.khangdjnh.identity_keycloak.identity.*;
 import feign.QueryMap;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -16,7 +14,12 @@ public interface IdentityClient {
     @PostMapping(
             value = "/realms/security-keycloak/protocol/openid-connect/token",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    TokenExchangeResponse exchangeToken(@QueryMap TokenExchangeParam tokenExchangeParam);
+    ClientTokenExchangeResponse exchangeClientToken(@QueryMap ClientTokenExchangeParam tokenExchangeParam);
+
+    @PostMapping(
+            value = "/realms/security-keycloak/protocol/openid-connect/token",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    UserTokenExchangeResponse exchangeUserToken(@QueryMap UserTokenExchangeParam tokenExchangeParam);
 
     @PostMapping(
             value = "/admin/realms/security-keycloak/users",

@@ -61,7 +61,7 @@
 
         @PutMapping("/{userId}")
         @PreAuthorize("hasRole('ADMIN') or @authz.isOwner(#userId)")
-        ApiResponse<UserResponse> updateUser (@PathVariable String userId, @RequestBody @Valid UserUpdateRequest request) {
+        ApiResponse<UserResponse> updateUser (@PathVariable String userId, @RequestBody UserUpdateRequest request) {
             return ApiResponse.<UserResponse>builder()
                     .code(1000)
                     .message("Success")
