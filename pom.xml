@@ -12,11 +12,11 @@
 		<relativePath/>
 	</parent>
 
-	<groupId>com.devteria</groupId>
-	<artifactId>indentity-service</artifactId>
+	<groupId>com.khangdev</groupId>
+	<artifactId>chat-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>indentity-service</name>
-	<description>indentity service</description>
+	<name>chat-app</name>
+	<description>Chat app</description>
 
 	<properties>
 		<java.version>21</java.version>
