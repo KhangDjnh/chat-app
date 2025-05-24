@@ -15,12 +15,25 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8180/realms/security-keycloak
+          issuer-uri: http://localhost:8180/realms/chat-app
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: chat-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: '*'
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
 
 idp:
   url: http://localhost:8180
-  client-id: security_app
-  client-secret: zDIbHoUdxlP1XzBIzGDB2MKxY9fM2FcD
+  client-id: chat_app
+  client-secret: CTDtmqhOe8KEOK0NqEY915YFV6XjIjZ9
 
 logging:
   level:
