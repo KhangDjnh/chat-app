@@ -17,7 +17,7 @@
     import java.util.List;
 
     @RestController
-    @RequestMapping("/users")
+    @RequestMapping("/api/users")
     @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
     @RequiredArgsConstructor
     @Slf4j

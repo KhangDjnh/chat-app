@@ -123,7 +123,7 @@ public class UserService {
 
         identityClient.resetUserPassword(
                 "Bearer " + accessToken,
-                "security-keycloak",
+                "chat_app",
                 userKeycloakId,
                 Credential.builder()
                         .type("password")

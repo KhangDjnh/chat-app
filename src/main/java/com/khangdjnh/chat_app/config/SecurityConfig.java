@@ -1,5 +1,6 @@
 package com.khangdjnh.chat_app.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -9,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
@@ -22,7 +25,9 @@ import java.util.List;
 @EnableMethodSecurity
 @EnableWebSecurity
 public class SecurityConfig {
-    private final String[] PUBLIC_ENDPOINTS = {"/auth/login", "/auth/register", "/users"};
+    private final String[] PUBLIC_ENDPOINTS = {
+            "/api/auth/login", "/api/auth/register", "/api/users",
+    };
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
@@ -35,7 +40,8 @@ public class SecurityConfig {
                         .permitAll()
                         .anyRequest()
                         .authenticated());
-        httpSecurity.oauth2ResourceServer(oauth2 -> oauth2.jwt(
+        httpSecurity.oauth2ResourceServer(oauth2 -> oauth2
+                .jwt(
                         jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(
                                 jwtAuthenticationConverter()
                         ))
@@ -48,7 +54,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+        configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:5500", "http://127.0.0.1:5500"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
